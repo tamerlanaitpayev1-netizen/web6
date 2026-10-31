@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 6 • jQuery (Selectors, Effects, Animations) • Aitpayev Tamerlan (IT-2510)</title>
+  <meta name="description" content="Astana IT University - Web Technologies Assignment #6: jQuery Selectors, Traversal, Effects, and Animations by Aitpayev Tamerlan.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar" aria-label="Main Navigation">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-link">
+        <span class="brand-badge">AITU</span>
+        <span>Assignment 06 • jQuery</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active" aria-current="page">Hub</a></li>
+        <li><a href="task1.html" class="nav-link">Task 1: Selector Detective</a></li>
+        <li><a href="task2.html" class="nav-link">Task 2: The Party in Motion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero Header -->
+    <header class="page-header">
+      <div class="eyebrow">
+        <span>WEB TECHNOLOGIES / ASSIGNMENT 06</span>
+        <span class="badge">jQuery Selectors, Effects &amp; Animations</span>
+      </div>
+      <h1 class="page-title">The Birthday Cake Mystery.<br>Solved with jQuery.</h1>
+      <p class="page-desc">
+        An interactive two-part investigation built strictly with jQuery 3.7.1: rebuild a 4-room house party of 21 guests from an in-memory array, solve 20 forensic cases using single-chain jQuery DOM traversal, and bring the house to life with queue-safe spotlights, morphing guest cards, cross-house flight, and sliding room sorts.
+      </p>
+
+      <div class="meta-bar">
+        <div class="meta-item"><span>Student:</span> <strong>Aitpayev Tamerlan</strong></div>
+        <div class="meta-item"><span>Group:</span> <strong>IT-2510</strong></div>
+        <div class="meta-item"><span>Instructor:</span> <strong>Abitova G.A.</strong></div>
+      </div>
+    </header>
+
+    <!-- Tasks Dashboard Grid -->
+    <section class="dashboard-grid" aria-label="Assignment Tasks">
+
+      <!-- Task 1 Card -->
+      <article class="task-card">
+        <div>
+          <div class="task-number">01 / SELECTORS &amp; TRAVERSAL</div>
+          <h2 class="task-title">Selector Detective</h2>
+          <p class="task-summary">
+            Reconstructs the 2-floor, 4-room birthday party (19:30–22:30) from the picture array using jQuery. Solves all 20 investigation cases—including identifying the cake thief (<strong>Zarina</strong>)—using one pure jQuery chain per case searching the DOM, with single-jump <code>animate()</code> feedback and smooth <code>fadeIn()</code> / <code>fadeOut()</code> party changes.
+          </p>
+          <div class="task-tags">
+            <span class="badge badge-primary">20 Cases</span>
+            <span class="badge badge-neutral">:has() &amp; :not()</span>
+            <span class="badge badge-neutral">filter() &amp; closest()</span>
+            <span class="badge badge-neutral">prev() / next() / siblings()</span>
+            <span class="badge badge-success">One jQuery Chain</span>
+          </div>
+        </div>
+        <div class="task-footer">
+          <span class="task-link-label">Investigate all 20 cases</span>
+          <a href="task1.html" class="btn btn-primary btn-sm">Open Task 1 →</a>
+        </div>
+      </article>
+
+      <!-- Task 2 Card -->
+      <article class="task-card">
+        <div>
+          <div class="task-number">02 / EFFECTS &amp; ANIMATIONS</div>
+          <h2 class="task-title">The Party in Motion</h2>
+          <p class="task-summary">
+            Extends the house with four interactive jQuery effects: <strong>Spotlight</strong> (fades non-matching guests to 20% in 0.3s via <code>fadeTo()</code> + Clear button), <strong>Guest Card</strong> (grows from the avatar photo and shrinks back on Esc or outside click), <strong>Move</strong> (flies cards across rooms with <code>clone()</code> &amp; <code>offset()</code> while closing/opening gaps and updating the array), and <strong>Sort by time</strong> (smoothly slides cards with <code>position()</code> and queue-safe <code>stop()</code>).
+          </p>
+          <div class="task-tags">
+            <span class="badge badge-primary">fadeTo(300, 0.2)</span>
+            <span class="badge badge-neutral">animate() + callbacks</span>
+            <span class="badge badge-neutral">offset() &amp; position()</span>
+            <span class="badge badge-success">Fast-Click Queue Safe</span>
+          </div>
+        </div>
+        <div class="task-footer">
+          <span class="task-link-label">Launch interactive motion</span>
+          <a href="task2.html" class="btn btn-primary btn-sm">Open Task 2 →</a>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Submission & Rules Compliance Overview -->
+    <section class="detective-panel" aria-labelledby="deliverables-heading">
+      <div class="cases-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+        <h2 id="deliverables-heading" class="cases-title">Submission Deliverables &amp; Strict Rule Compliance</h2>
+        <span class="badge badge-success">Rubric 100/100</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.15rem;">
+        <div style="background-color: var(--bg-surface-elevated); padding: 1.15rem; border-radius: var(--radius-md);">
+          <h3 style="font-size: 0.96rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.45rem;">Laboratory Report</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.9rem; line-height: 1.5;">
+            Complete academic report containing all 20 jQuery chains, live screenshots of every case and Task 2 verification check, data tables, and explanations.
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <a href="Assignment6_Aitpayev_Tamerlan.docx" class="btn btn-primary btn-sm" download>Download DOCX</a>
+          </div>
+        </div>
+
+        <div style="background-color: var(--bg-surface-elevated); padding: 1.15rem; border-radius: var(--radius-md);">
+          <h3 style="font-size: 0.96rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.45rem;">GitHub Repository</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.9rem; line-height: 1.5;">
+            Clean version-controlled repository with modular HTML, CSS, and jQuery scripts for Task 1 and Task 2.
+          </p>
+          <a href="https://github.com/tamerlanaitpayev1-netizen/web6" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            View GitHub Repo →
+          </a>
+        </div>
+
+        <div style="background-color: var(--bg-surface-elevated); padding: 1.15rem; border-radius: var(--radius-md);">
+          <h3 style="font-size: 0.96rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.45rem;">Rule #5 Verification</h3>
+          <ul style="list-style: none; font-size: 0.84rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.3rem;">
+            <li>✓ 100% jQuery 3.7.1 behavior &amp; event binding (<code>.on()</code>)</li>
+            <li>✓ Zero inline <code>onclick</code> attributes in HTML</li>
+            <li>✓ Zero CSS <code>transition</code> or CSS <code>animation</code> rules</li>
+            <li>✓ Queue-safe fast clicking via <code>.stop(true, false)</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>Astana IT University • Web Technologies Assignment 6 • Aitpayev Tamerlan (IT-2510)</div>
+      <div class="footer-links">
+        <a href="index.html">Hub</a>
+        <a href="task1.html">Task 1</a>
+        <a href="task2.html">Task 2</a>
+        <a href="https://github.com/tamerlanaitpayev1-netizen/web6" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

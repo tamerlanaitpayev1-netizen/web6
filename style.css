@@ -1,0 +1,1102 @@
+/* ==========================================================================
+   ASSIGNMENT #6: jQUERY (SELECTORS, EFFECTS, ANIMATIONS)
+   Student: Aitpayev Tamerlan (IT-2510) | Astana IT University
+   Design System: Maritime Naval Blue & Warm Architectural House Palette
+   Strict Rule 5 Compliance: ZERO CSS transitions, ZERO CSS animations!
+   All behavioral motion is powered exclusively by jQuery effects/animations.
+   ========================================================================== */
+
+:root {
+  /* Architectural & Editorial Color Ramp */
+  --bg-main: #f4f6f9;
+  --bg-surface: #ffffff;
+  --bg-surface-subtle: #f8fafc;
+  --bg-surface-elevated: #edf2f7;
+
+  --border-subtle: #d5e0ec;
+  --border-strong: #a9bed4;
+  --border-focus: #0f2c4c;
+
+  /* Same-ramp Navy to Slate Inks */
+  --text-main: #0a192f;
+  --text-secondary: #243b53;
+  --text-muted: #486581;
+  --text-dim: #7b93ab;
+
+  /* Naval Blue Primary */
+  --color-primary: #0f2c4c;
+  --color-primary-hover: #07172b;
+  --color-primary-light: #e6eef6;
+  --color-primary-border: #b8cde0;
+
+  /* House Timber & Architectural Tones (matching the party diagram) */
+  --house-wood-dark: #5c3a28;
+  --house-wood-mid: #734b34;
+  --house-wood-border: #472b1c;
+  --house-wall-label: #d8c8b4;
+  --house-room-bg: #fdfbf7;
+  --house-lawn: #559e4c;
+
+  /* Guest Clothing Ring Palette (6 colors from legend) */
+  --ring-blue: #2563eb;
+  --ring-purple: #9333ea;
+  --ring-green: #16a34a;
+  --ring-red: #dc2626;
+  --ring-black: #1e293b;
+  --ring-yellow: #eab308;
+
+  /* Detective Highlighting & Semantic States */
+  --highlight-gold: #f59e0b;
+  --highlight-bg: #fffbeb;
+  --highlight-ring: #d97706;
+
+  --thief-red: #dc2626;
+  --thief-bg: #fef2f2;
+
+  --color-success-bg: #edfbf5;
+  --color-success-text: #065f46;
+  --color-success-border: #a7f3d0;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, 'SF Mono', monospace;
+
+  /* Geometry & Elevation */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(10, 25, 47, 0.06);
+  --shadow-md: 0 4px 12px rgba(10, 25, 47, 0.08);
+  --shadow-lg: 0 14px 32px rgba(10, 25, 47, 0.14);
+}
+
+/* Base Reset — Strictly NO CSS transition or animation properties anywhere */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Layout Containers */
+.container {
+  width: 100%;
+  max-width: 1260px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Top Navigation Bar */
+.navbar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: 750;
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-badge {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.35rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+  background-color: var(--bg-surface-elevated);
+}
+
+.nav-link.active {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-border);
+  font-weight: 700;
+}
+
+/* Page Header & Intro */
+.page-header {
+  padding: 1.75rem 0 1.25rem 0;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow .badge {
+  background-color: var(--bg-surface-elevated);
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-weight: 650;
+  border: 1px solid var(--border-subtle);
+}
+
+.page-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+  color: var(--color-primary);
+}
+
+.page-desc {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  max-width: 820px;
+  line-height: 1.55;
+}
+
+.meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.meta-item strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+main {
+  flex: 1 0 auto;
+  padding-bottom: 3rem;
+}
+
+/* ==========================================================================
+   ARCHITECTURAL HOUSE COMPONENT ("The Party, 19:30 - 22:30")
+   ========================================================================== */
+.house-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Pitched Roof */
+.house-roof {
+  width: 100%;
+  max-width: 1220px;
+  height: 76px;
+  background-color: var(--house-wood-dark);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.roof-banner {
+  background-color: #fdfbf7;
+  border: 2px solid var(--house-wood-border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 1.25rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #2b1810;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: -0.01em;
+}
+
+/* Main Building Body */
+.house-frame {
+  width: 100%;
+  max-width: 1220px;
+  background-color: var(--house-wood-mid);
+  border: 6px solid var(--house-wood-dark);
+  border-top: 4px solid var(--house-wood-border);
+  border-radius: 0 0 4px 4px;
+  box-shadow: var(--shadow-md);
+  overflow: visible;
+}
+
+/* Floor Row (Floor 2 & Floor 1) */
+.floor-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  border-bottom: 6px solid var(--house-wood-dark);
+}
+
+.floor-row:last-child {
+  border-bottom: none;
+}
+
+.floor-label-bar {
+  background-color: var(--house-wall-label);
+  border-right: 4px solid var(--house-wood-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #3d2516;
+  text-transform: uppercase;
+  user-select: none;
+  padding: 0.5rem 0;
+}
+
+.floor-rooms {
+  display: grid;
+  grid-template-columns: 44fr 56fr;
+  background-color: var(--house-wood-dark);
+  gap: 5px;
+}
+
+/* Individual Room Container */
+.room {
+  background-color: var(--house-room-bg);
+  padding: 0.75rem 0.85rem 0.9rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 215px;
+  border: 2px solid transparent;
+}
+
+/* Balcony Railing Visual Decoration */
+.room[data-room="balcony"] {
+  background-image: linear-gradient(to bottom, #f0f6fc 0%, #fdfbf7 55%);
+}
+
+/* Room Highlight State when Case 14, 15, or 16 matches a Room */
+.room.is-found-room {
+  background-color: #fffbeb;
+  border-color: var(--highlight-gold);
+  box-shadow: inset 0 0 0 2px var(--highlight-gold);
+}
+
+.room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  gap: 0.5rem;
+}
+
+.room-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.room-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #2b1810;
+  letter-spacing: -0.01em;
+}
+
+.room-count-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background-color: #efe9de;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-full);
+}
+
+/* Sort by Time Button inside Room Header (Task 2) */
+.btn-sort-room {
+  font-family: inherit;
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 0.24rem 0.65rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-sort-room:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.btn-sort-room.is-sorted {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+/* Guests Horizontal Lineup inside Room */
+.room-guests {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.45rem;
+  min-height: 158px;
+  position: relative;
+  flex-wrap: nowrap;
+  overflow-x: visible;
+}
+
+/* ==========================================================================
+   GUEST CARD COMPONENT
+   ========================================================================== */
+.guest-card {
+  width: 82px;
+  min-width: 74px;
+  background-color: #ffffff;
+  border: 1.5px solid #e2d9c8;
+  border-radius: var(--radius-md);
+  padding: 0.45rem 0.3rem 0.4rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 4px rgba(43, 24, 16, 0.05);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.task2-mode .guest-card {
+  cursor: pointer;
+}
+
+.task2-mode .guest-card:hover {
+  border-color: var(--color-primary);
+}
+
+/* Highlighted Guest Card when found by a Detective Case */
+.guest-card.is-found {
+  background-color: var(--highlight-bg);
+  border-color: var(--highlight-ring);
+  box-shadow: 0 0 0 2.5px var(--highlight-gold), 0 6px 14px rgba(217, 119, 6, 0.22);
+  z-index: 5;
+}
+
+/* Special Thief Highlight for Case 20 */
+.guest-card.is-thief {
+  background-color: var(--thief-bg);
+  border-color: var(--thief-red);
+  box-shadow: 0 0 0 3px var(--thief-red), 0 8px 18px rgba(220, 38, 38, 0.28);
+  z-index: 6;
+}
+
+/* Avatar Ring with Clothing Color */
+.avatar-wrapper {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 0.3rem;
+}
+
+.avatar-ring {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3.5px solid var(--ring-black);
+  background-color: #f8fafc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest-card.color-blue .avatar-ring   { border-color: var(--ring-blue); }
+.guest-card.color-purple .avatar-ring { border-color: var(--ring-purple); }
+.guest-card.color-green .avatar-ring  { border-color: var(--ring-green); }
+.guest-card.color-red .avatar-ring    { border-color: var(--ring-red); }
+.guest-card.color-black .avatar-ring  { border-color: var(--ring-black); }
+.guest-card.color-yellow .avatar-ring { border-color: var(--ring-yellow); }
+
+.guest-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* AITU Student Badge on Top-Right of Avatar */
+.aitu-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #0284c7;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.aitu-badge svg {
+  width: 11px;
+  height: 11px;
+}
+
+/* Guest Name & Time */
+.guest-name {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.15;
+  margin-bottom: 0.15rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.guest-time {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #f1ece1;
+  width: 100%;
+  justify-content: center;
+}
+
+.guest-time svg {
+  width: 9px;
+  height: 9px;
+  opacity: 0.75;
+}
+
+/* Things Icons Bar */
+.guest-things {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 16px;
+}
+
+.thing-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  color: #334e68;
+}
+
+.thing-icon.thing-crumbs {
+  color: #b45309;
+}
+
+.thing-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* House Lawn & Legend Bar */
+.house-foundation {
+  width: 100%;
+  max-width: 1250px;
+  background-color: var(--house-wood-mid);
+  border: 4px solid var(--house-wood-dark);
+  border-top: 5px solid var(--house-lawn);
+  border-radius: 0 0 8px 8px;
+  padding: 0.65rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.legend-bar {
+  background-color: #fdfbf7;
+  border: 1.5px solid var(--house-wood-dark);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 1.1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.35rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: #2b1810;
+}
+
+.legend-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.color-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.legend-item svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   DETECTIVE CONSOLE & RESULT BANNER
+   ========================================================================== */
+.detective-panel {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.detective-status-bar {
+  background-color: var(--bg-surface-subtle);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.status-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.status-case-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.status-result-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.status-result-text strong {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.status-chain-box {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  max-width: 100%;
+  border: 1px solid #334155;
+}
+
+/* Case Buttons Grid (20 Cases) */
+.cases-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cases-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 0.55rem;
+}
+
+.btn-case {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  text-align: left;
+  background-color: var(--bg-surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-main);
+}
+
+.btn-case:hover {
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-strong);
+}
+
+.btn-case.is-active {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.btn-case.case-thief {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.btn-case.case-thief.is-active {
+  background-color: #fee2e2;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 1.5px #dc2626;
+}
+
+.case-num {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  min-width: 24px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+
+.btn-case.case-thief .case-num {
+  background-color: #dc2626;
+}
+
+.case-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-secondary);
+}
+
+.btn-case.is-active .case-label {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   TASK 2: FLOATING GUEST INSPECTOR CARD (Grows from photo & shrinks back)
+   ========================================================================== */
+.guest-popup-card {
+  position: absolute;
+  z-index: 1000;
+  background-color: #ffffff;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: none;
+  padding: 1.15rem;
+  color: var(--text-main);
+}
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.popup-avatar-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 4px solid var(--ring-black);
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #f8fafc;
+}
+
+.popup-avatar-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-title-area {
+  flex: 1;
+}
+
+.popup-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.popup-room-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-close-popup {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close-popup:hover {
+  background: var(--color-danger-bg);
+  color: var(--thief-red);
+}
+
+.popup-details-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface-subtle);
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.popup-details-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+
+.popup-details-list li::before {
+  content: "•";
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.popup-moves-title {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.popup-move-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.btn-move-room {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-move-room:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Ghost Placeholder for Smooth Room Moves */
+.guest-slot-spacer {
+  height: 150px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   GENERAL BUTTONS & HUB CARDS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.52rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--color-primary);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-surface-elevated);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  border-radius: var(--radius-md);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.task-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+}
+
+.task-number {
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.45rem;
+}
+
+.task-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 0.6rem;
+}
+
+.task-summary {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.15rem;
+  line-height: 1.55;
+}
+
+.task-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+}
+
+.badge-primary { background: var(--color-primary-light); color: var(--color-primary); border-color: var(--color-primary-border); }
+.badge-success { background: var(--color-success-bg); color: var(--color-success-text); border-color: var(--color-success-border); }
+.badge-neutral { background: var(--bg-surface-elevated); color: var(--text-secondary); border-color: var(--border-subtle); }
+
+.task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.task-link-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Site Footer */
+.site-footer {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.25rem 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+  .floor-rooms {
+    grid-template-columns: 1fr;
+  }
+  .room-guests {
+    flex-wrap: wrap;
+  }
+}
+
